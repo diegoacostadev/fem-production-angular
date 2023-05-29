@@ -12,7 +12,7 @@ import { RoutingModule } from './routing.module';
 import { WidgetDetailsComponent } from './widgets/widget-details/widget-details.component';
 import { WidgetsListComponent } from './widgets/widgets-list/widgets-list.component';
 import { WidgetsComponent } from './widgets/widgets.component';
-
+import { UiToolbarModule } from "@fem/ui-toolbar";
 @NgModule({
   declarations: [
     AppComponent,
@@ -28,6 +28,7 @@ import { WidgetsComponent } from './widgets/widgets.component';
     CoreStateModule,
     FormsModule,
     HttpClientModule,
+    UiToolbarModule,
     MaterialModule,
     RoutingModule,
   ],

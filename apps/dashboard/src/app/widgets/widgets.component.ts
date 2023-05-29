@@ -22,6 +22,7 @@ const emptyWidget: Widget = {
 })
 export class WidgetsComponent implements OnInit {
   widgets$: Observable<Widget[]>;
+  widgets: Widget[];
   selectedWidget: Widget;
 
   constructor(private widgetsService: WidgetsService) {}
