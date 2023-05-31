@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '@env/environment';
 import { Widget } from '@fem/api-interfaces';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -20,15 +21,15 @@ export class WidgetsService {
   }
 
   create(widget: Widget) {
-    return this.http.post(this.getUrl(), widget);
+    return this.http.post<Widget[]>(this.getUrl(), widget);
   }
 
   update(widget: Widget) {
-    return this.http.put(this.getUrlWithId(widget.id), widget);
+    return this.http.put<Widget[]>(this.getUrlWithId(widget.id), widget);
   }
 
   delete(widget: Widget) {
-    return this.http.delete(this.getUrlWithId(widget.id));
+    return this.http.delete<Widget[]>(this.getUrlWithId(widget.id));
   }
 
   private getUrl() {
