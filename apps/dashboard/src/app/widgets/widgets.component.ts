@@ -68,7 +68,6 @@ export class WidgetsComponent implements OnInit {
   }
 
   deleteWidget(widget: Widget) {
-    this.widgets = this.widgets.filter((w) => widget.id !== w.id);
     this.widgets$ = this.widgetsService.delete(widget)
     this.resetForm();
   }
