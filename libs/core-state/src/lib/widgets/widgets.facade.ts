@@ -4,16 +4,29 @@ import { select, Store, Action } from '@ngrx/store';
 
 import * as fromWidgets from './widgets.reducer';
 import * as WidgetsSelectors from './widgets.selectors';
+import { Subject } from 'rxjs';
+import { Widget } from '@fem/api-interfaces';
+import { WidgetsService } from '@fem/core-data';
 
 @Injectable()
 export class WidgetsFacade {
-  loaded$ = this.store.pipe(select(WidgetsSelectors.getWidgetsLoaded));
-  allWidgets$ = this.store.pipe(select(WidgetsSelectors.getAllWidgets));
-  selectedWidgets$ = this.store.pipe(select(WidgetsSelectors.getSelected));
+  private allWidgets = new Subject<Widget[]>();
+  private selectedWidget = new Subject<Widget>();
+  private mutations = new Subject();
 
-  constructor(private store: Store<fromWidgets.WidgetsPartialState>) {}
+  allWidgets$ = this.allWidgets.asObservable();
+  selectedWidget$ = this.selectedWidget.asObservable();
+  mutations$ = this.mutations.asObservable();
 
-  dispatch(action: Action) {
-    this.store.dispatch(action);
+  constructor(private widgetsServive: WidgetsService) {}
+
+  loadWidgets() {
+    this.widgetsServive
+      .all()
+      .subscribe((widgets: Widget[]) => this.allWidgets.next(widgets));
+  }
+
+  selectWidget(widget: Widget) {
+    this.selectedWidget.next(widget);
   }
 }

@@ -5,15 +5,12 @@ import { EffectsModule } from '@ngrx/effects';
 import * as fromWidgets from './widgets/widgets.reducer';
 import { WidgetsEffects } from './widgets/widgets.effects';
 import { WidgetsFacade } from './widgets/widgets.facade';
+import { CoreDataModule } from '@fem/core-data';
 
 @NgModule({
   imports: [
     CommonModule,
-    StoreModule.forFeature(
-      fromWidgets.WIDGETS_FEATURE_KEY,
-      fromWidgets.reducer
-    ),
-    EffectsModule.forFeature([WidgetsEffects]),
+    CoreDataModule,
   ],
   providers: [WidgetsFacade],
 })
